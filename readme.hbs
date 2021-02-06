@@ -1,0 +1,66 @@
+# {{{name}}}
+
+## Table of contents
+
+1. [Docs](#docs)
+1. [Quick start](#quick-start)
+{{#if has_inputs}}
+1. [Inputs](#inputs)
+{{/if}}
+{{#if has_outputs}}
+1. [Outputs](#outputs)
+{{/if}}
+
+<a name="quick-start" ></a>
+## Docs
+
+Original documentation: {{{octokit_doc}}}
+
+{{{description}}}
+
+
+<a name="quick start" ></a>
+## Quick start
+
+```yaml
+- uses: {{{owner}}}/{{{repo}}}/{{{oction_path}}}@{{{version}}}
+{{#if has_outputs}}
+  id: my_step_id
+{{/if}}
+  with:
+{{#inputs}}
+        {{#required}}
+    {{{name}}}: <{{{name}}} value>
+        {{/required}}
+{{/inputs}}
+{{#if has_outputs}}
+- name: Print outputs
+  run: |
+    {{#outputs}}
+    echo $\{{ steps.my_step_id.outputs.{{{name}}} }}
+    {{/outputs}}
+{{/if}}
+```
+
+
+{{#if has_inputs}}
+<a name="inputs" ></a>
+## Inputs
+
+| Name | Is required | Description |
+|---|---|---|
+{{#inputs}}
+|{{{name}}}|{{{required}}}|{{{singleline description}}}
+{{/inputs}}
+{{/if}}
+
+{{#if has_outputs}}
+<a name="outputs" ></a>
+## Outputs
+
+| Name | Description |
+|---|---|
+{{#outputs}}
+|{{{name}}}|{{{description}}}|
+{{/outputs}}
+{{/if}}
